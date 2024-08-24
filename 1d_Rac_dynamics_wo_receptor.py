@@ -16,10 +16,10 @@ radius = compart_num * space_interval / 2 / py.pi # radius of the cell, assuming
 
 Rac_initial_unitnum = 5 # initial number of Rac molecules in each compartment
 
-Rac_dist = [15 for i in range(200)] + [Rac_initial_unitnum for i in range(compart_num-200)]
+Rac_dist = [15 for i in range(10)] + [Rac_initial_unitnum for i in range(compart_num-10)]
 Rac_inact_dist = [Rac_initial_unitnum for i in range(compart_num)]
 
-Rac_total_num = Rac_initial_unitnum * compart_num +  Rac_initial_unitnum * compart_num + 10*200 # total number of Rac molecules
+Rac_total_num = Rac_initial_unitnum * compart_num +  Rac_initial_unitnum * compart_num + 10*10 # total number of Rac molecules
 
 D_act = 1
 D_inact = 5
@@ -39,13 +39,14 @@ def pde2nd_Forward_time_centered_space(Rac_dist, Rac_inact_dist, D_act, D_inact,
         elif i == compart_num - 1:
             forstep = 0
 
+        reaction_number = reaction(Rac_dist[i],Rac_inact_dist[i])
         space_diff = D_act * (Rac_dist[forstep] + Rac_dist[backstep] - Rac_dist[i] * 2) / space_interval / space_interval
-        new_Rac_dist[i] = (space_diff + reaction(Rac_dist[i],Rac_inact_dist[i])) * time_interval + Rac_dist[i]
+        new_Rac_dist[i] = (space_diff + reaction_number) * time_interval + Rac_dist[i]
         if new_Rac_dist[i] < 0:
             new_Rac_dist[i] = 0
 
         space_diff = D_inact * (Rac_inact_dist[forstep] + Rac_inact_dist[backstep] - Rac_inact_dist[i] * 2) / space_interval / space_interval
-        new_Rac_inact_dist[i] = (space_diff - reaction(Rac_dist[i],Rac_inact_dist[i])) * time_interval + Rac_inact_dist[i]
+        new_Rac_inact_dist[i] = (space_diff - reaction_number) * time_interval + Rac_inact_dist[i]
         if new_Rac_inact_dist[i] < 0:
             new_Rac_inact_dist[i] = 0
     return new_Rac_dist, new_Rac_inact_dist
@@ -63,7 +64,13 @@ def exchange(rho_Rac_act, rho_Rac_inact):
     delta = 1
     cap_K = 1
     # exchange expression
-    return rho_Rac_inact * (k_0 + gamma*rho_Rac_act*rho_Rac_act/(cap_K*cap_K+rho_Rac_act*rho_Rac_act)) - delta*rho_Rac_act
+    rate_exchange = k_0 + gamma*rho_Rac_act*rho_Rac_act/(cap_K*cap_K+rho_Rac_act*rho_Rac_act)
+    num_exchange = rho_Rac_inact * rate_exchange - delta*rho_Rac_act
+    return num_exchange
+
+# 测试用
+def zerotest(rho_Rac_act, rho_Rac_inact):
+    return 0
 
 
 # Check conservation
@@ -78,7 +85,7 @@ def check_totalnumber_conservation(Rac_total_num, Rac_dist, Rac_inact_dist):
 time_start = time.time()
 
 
-for i in range(2000):
+for i in range(100):
     new_Rac_dist, new_Rac_inact_dist = pde2nd_Forward_time_centered_space(Rac_dist=Rac_dist, Rac_inact_dist=Rac_inact_dist, D_act=D_act, D_inact=D_inact, \
         compart_num=compart_num,time_interval=time_interval,space_interval=space_interval,reaction=exchange)
     Rac_dist = new_Rac_dist
