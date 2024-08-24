@@ -21,15 +21,15 @@ def pde2nd_Forward_time_centered_space(Rac_dist, Rac_inact_dist, D_act, D_inact,
     new_Rac_inact_dist = [0 for i in range(compart_num)]
     for i in range(compart_num):
         backstep = i - 1
+        forstep = i + 1
         if i == 0:
             backstep = compart_num - 1
-        forstep = i + 1
-        if i == compart_num - 1:
+        elif i == compart_num - 1:
             forstep = 0
         space_diff = D_act * (Rac_dist[forstep] + Rac_dist[backstep] - Rac_dist[i] * 2) / space_interval / space_interval
-        new_Rac_dist[i] = (Rac_dist[i] + space_diff + reaction) * time_interval
+        new_Rac_dist[i] = (space_diff + reaction) * time_interval + Rac_dist[i]
         space_diff = D_inact * (Rac_inact_dist[forstep] + Rac_inact_dist[backstep] - Rac_inact_dist[i] * 2) / space_interval / space_interval
-        new_Rac_inact_dist[i] = (Rac_inact_dist[i] + space_diff + reaction) * time_interval
+        new_Rac_inact_dist[i] = (space_diff + reaction) * time_interval + Rac_inact_dist[i]
     return new_Rac_dist, new_Rac_inact_dist
 
 for i in range(500):
@@ -39,4 +39,5 @@ for i in range(500):
     Rac_inact_dist = new_Rac_inact_dist
 
 plt.plot(range(compart_num),Rac_dist)
+plt.xlim(0,compart_num-1)
 plt.show()
