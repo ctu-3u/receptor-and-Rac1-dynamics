@@ -3,6 +3,10 @@ import time
 import numpy as py
 import matplotlib.pyplot as plt
 
+from reaction import Reaction
+
+
+#######
 # simulation parameters
 
 time_interval = 0.1
@@ -24,7 +28,7 @@ Rac_total_num = Rac_initial_unitnum * compart_num +  Rac_initial_unitnum * compa
 D_act = 1
 D_inact = 5
 
-
+#######
 # Modules
 # FTCS scheme solution
 def pde2nd_Forward_time_centered_space(Rac_dist, Rac_inact_dist, D_act, D_inact, reaction, compart_num, time_interval, space_interval):
@@ -48,6 +52,7 @@ def pde2nd_Forward_time_centered_space(Rac_dist, Rac_inact_dist, D_act, D_inact,
         space_diff = D_inact * (Rac_inact_dist[forstep] + Rac_inact_dist[backstep] - Rac_inact_dist[i] * 2) / space_interval / space_interval
         new_Rac_inact_dist[i] = (space_diff - reaction_number) * time_interval + Rac_inact_dist[i]
         if new_Rac_inact_dist[i] < 0:
+            print("didi")
             new_Rac_inact_dist[i] = 0
     return new_Rac_dist, new_Rac_inact_dist
 
@@ -80,14 +85,18 @@ def check_totalnumber_conservation(Rac_total_num, Rac_dist, Rac_inact_dist):
         num += Rac_dist[i] + Rac_inact_dist[i]
     return num - Rac_total_num
 
+#######
+# define reaction
+positive_feedback = Reaction()
 
 # Start running simulation
 time_start = time.time()
 
 
-for i in range(100):
+for i in range(300):
     new_Rac_dist, new_Rac_inact_dist = pde2nd_Forward_time_centered_space(Rac_dist=Rac_dist, Rac_inact_dist=Rac_inact_dist, D_act=D_act, D_inact=D_inact, \
-        compart_num=compart_num,time_interval=time_interval,space_interval=space_interval,reaction=exchange)
+        compart_num=compart_num,time_interval=time_interval,space_interval=space_interval,\
+            reaction=positive_feedback.reaction)
     Rac_dist = new_Rac_dist
     Rac_inact_dist = new_Rac_inact_dist
 
