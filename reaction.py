@@ -9,8 +9,8 @@ class Reaction:
         return num_react
 
     # Exchange expression
-    def exchange(self,func,rho_act,rho_inact,t=0,x=0):
-        num = func(t=t,x=x,rho_act=rho_act,rho_inact=rho_inact)
+    def exchange(self,rho_act,rho_inact,t=0,x=0):
+        num = self.positive_feedback_Hills(t=t,x=x,rho_act=rho_act,rho_inact=rho_inact)
         return num
     
     def positive_feedback_Hills(self,rho_act,rho_inact,t=0,x=0):
@@ -25,15 +25,15 @@ class Reaction:
         return num_exchange
 
     # stimulus expression
-    def stimulus(self,func,t,x,rho_act=0,rho_inact=0):
-        num = func(t=t,x=x,rho_act=rho_act,rho_inact=rho_inact)
+    def stimulus(self,t,x,rho_act=0,rho_inact=0):
+        num = self.square_initial_pulse(t=t,x=x,rho_act=rho_act,rho_inact=rho_inact)
         return num
 
     def square_initial_pulse(self,t,x,rho_act=0,rho_inact=0):
         # configure stimulus coefficients
         addition = 10
-        t_end = 10
-        x_end = 50
+        t_end = 1
+        x_end = 100
         # stimulus expression
         if t < t_end and x < x_end:
             return addition
