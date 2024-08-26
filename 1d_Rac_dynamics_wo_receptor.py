@@ -25,8 +25,8 @@ Rac_inact_dist = [Rac_initial_unitnum for i in range(compart_num)]
 
 Rac_total_num = Rac_initial_unitnum * compart_num +  Rac_initial_unitnum * compart_num + 10*10 # total number of Rac molecules
 
-D_act = 1
-D_inact = 5
+D_act = 0.1
+D_inact = 1
 
 #######
 # Modules
@@ -43,6 +43,9 @@ def pde2nd_Forward_time_centered_space(Rac_dist, Rac_inact_dist, D_act, D_inact,
         elif i == compart_num - 1:
             forstep = 0
 
+        # 测试用
+        # space_diff = 0
+
         reaction_number = reaction(Rac_dist[i],Rac_inact_dist[i])
         space_diff = D_act * (Rac_dist[forstep] + Rac_dist[backstep] - Rac_dist[i] * 2) / space_interval / space_interval
         new_Rac_dist[i] = (space_diff + reaction_number) * time_interval + Rac_dist[i]
@@ -52,26 +55,8 @@ def pde2nd_Forward_time_centered_space(Rac_dist, Rac_inact_dist, D_act, D_inact,
         space_diff = D_inact * (Rac_inact_dist[forstep] + Rac_inact_dist[backstep] - Rac_inact_dist[i] * 2) / space_interval / space_interval
         new_Rac_inact_dist[i] = (space_diff - reaction_number) * time_interval + Rac_inact_dist[i]
         if new_Rac_inact_dist[i] < 0:
-            print("didi")
             new_Rac_inact_dist[i] = 0
     return new_Rac_dist, new_Rac_inact_dist
-
-
-# Reaction term, including exchange term and stimuli term
-def reaction(exchange, stimuli, rho_Rac_act, rho_Rac_inact):
-    return exchange(rho_Rac_act,rho_Rac_inact) + stimuli(rho_Rac_act,rho_Rac_inact)
-
-# Exchange reaction term
-def exchange(rho_Rac_act, rho_Rac_inact):
-    # define reaction coefficients
-    k_0 = 0.067
-    gamma = 1
-    delta = 1
-    cap_K = 1
-    # exchange expression
-    rate_exchange = k_0 + gamma*rho_Rac_act*rho_Rac_act/(cap_K*cap_K+rho_Rac_act*rho_Rac_act)
-    num_exchange = rho_Rac_inact * rate_exchange - delta*rho_Rac_act
-    return num_exchange
 
 # 测试用
 def zerotest(rho_Rac_act, rho_Rac_inact):
@@ -93,7 +78,7 @@ positive_feedback = Reaction()
 time_start = time.time()
 
 
-for i in range(300):
+for i in range(2000):
     new_Rac_dist, new_Rac_inact_dist = pde2nd_Forward_time_centered_space(Rac_dist=Rac_dist, Rac_inact_dist=Rac_inact_dist, D_act=D_act, D_inact=D_inact, \
         compart_num=compart_num,time_interval=time_interval,space_interval=space_interval,\
             reaction=positive_feedback.reaction)

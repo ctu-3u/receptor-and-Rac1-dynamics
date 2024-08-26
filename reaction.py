@@ -13,7 +13,7 @@ class Reaction:
         num = func(t=t,x=x,rho_act=rho_act,rho_inact=rho_inact)
         return num
     
-    def positive_feedback_Hills(self,rho_act,rho_inact,t=0,x=0,):
+    def positive_feedback_Hills(self,rho_act,rho_inact,t=0,x=0):
         # configure reaction coefficients
         k_0 = 0.067
         gamma = 1
