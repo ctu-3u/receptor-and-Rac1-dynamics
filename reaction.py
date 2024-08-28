@@ -10,7 +10,7 @@ class Reaction:
 
     # Exchange expression
     def exchange(self,rho_act,rho_inact,t=0,x=0):
-        num = self.positive_feedback_Hills(t=t,x=x,rho_act=rho_act,rho_inact=rho_inact)
+        num = self.zerotest(t=t,x=x,rho_act=rho_act,rho_inact=rho_inact)
         return num
     
     def positive_feedback_Hills(self,rho_act,rho_inact,t=0,x=0):
@@ -24,9 +24,9 @@ class Reaction:
         num_exchange = rho_inact * rate_exchange - delta*rho_act
         return num_exchange
 
-    # stimulus expression
+    # Stimulus expression
     def stimulus(self,t,x,rho_act=0,rho_inact=0):
-        num = self.square_initial_pulse(t=t,x=x,rho_act=rho_act,rho_inact=rho_inact)
+        num = self.zerotest(t=t,x=x,rho_act=rho_act,rho_inact=rho_inact)
         return num
 
     def square_initial_pulse(self,t,x,rho_act=0,rho_inact=0):
@@ -39,5 +39,7 @@ class Reaction:
             return addition
         return 0
 
+
+    # Test for non-reaction expression
     def zerotest(self,t,x,rho_act=0,rho_inact=0):
         return 0
