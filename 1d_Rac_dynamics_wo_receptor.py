@@ -83,9 +83,9 @@ for i in range(5001):
     Rac_inact_dist = new_Rac_inact_dist
     # record results in hdf5 file
     if i % 50 == 0:
-        with h5py.File(".\\data\\082824_testrun\\Act_Rac.h5",'w') as f:
+        with h5py.File(".\\data\\082824_testrun\\Act_Rac.h5",'a') as f:
             dset = f.create_dataset('act_dist_'+str(i),data=Rac_dist)
-        with h5py.File(".\\data\\082824_testrun\\Inact_Rac.h5",'w') as f:
+        with h5py.File(".\\data\\082824_testrun\\Inact_Rac.h5",'a') as f:
             dset = f.create_dataset('inact_dist_'+str(i),data=Rac_inact_dist)
 
 
