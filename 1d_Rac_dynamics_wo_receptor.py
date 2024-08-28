@@ -22,7 +22,8 @@ radius = compart_num * space_interval / 2 / np.pi # radius of the cell, assuming
 
 Rac_initial_unitnum = 5 # initial number of Rac molecules in each compartment
 
-Rac_dist = np.append(np.linspace(15,15,200),np.linspace(Rac_initial_unitnum,Rac_initial_unitnum,compart_num-200))
+Rac_dist = np.linspace(Rac_initial_unitnum,Rac_initial_unitnum,compart_num)
+# Rac_dist = np.append(np.linspace(15,15,200),np.linspace(Rac_initial_unitnum,Rac_initial_unitnum,compart_num-200))
 Rac_inact_dist = np.linspace(int(Rac_initial_unitnum/2),int(Rac_initial_unitnum/2),compart_num)
 
 Rac_total_num = np.sum(Rac_dist) + np.sum(Rac_inact_dist) # total number of Rac molecules
@@ -82,9 +83,9 @@ for i in range(5001):
     Rac_inact_dist = new_Rac_inact_dist
     # record results in hdf5 file
     if i % 50 == 0:
-        with h5py.File(".\\data\\082724_diff_testrun\\Act_Rac.h5",'w') as f:
+        with h5py.File(".\\data\\082824_testrun\\Act_Rac.h5",'w') as f:
             dset = f.create_dataset('act_dist_'+str(i),data=Rac_dist)
-        with h5py.File(".\\data\\082724_diff_testrun\\Inact_Rac.h5",'w') as f:
+        with h5py.File(".\\data\\082824_testrun\\Inact_Rac.h5",'w') as f:
             dset = f.create_dataset('inact_dist_'+str(i),data=Rac_inact_dist)
 
 
