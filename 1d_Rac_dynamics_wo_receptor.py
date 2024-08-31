@@ -11,12 +11,12 @@ from reaction import Reaction
 #######
 # simulation parameters
 
-time_interval = 0.1
-space_interval = 1
+time_interval = 0.01
+space_interval = 0.25
 
 # system parameters
 
-compart_num = 6283 # number of compartments we devide for simulation
+compart_num = 100 # number of compartments we devide for simulation
 
 radius = compart_num * space_interval / 2 / np.pi # radius of the cell, assuming the cell has a round shape
 
@@ -75,7 +75,7 @@ positive_feedback = Reaction()
 time_start = time.time()
 
 
-for i in range(5001):
+for i in range(60001):
     new_Rac_dist, new_Rac_inact_dist = pde2nd_Forward_time_centered_space(Rac_dist=Rac_dist, Rac_inact_dist=Rac_inact_dist, D_act=D_act, D_inact=D_inact, \
         compart_num=compart_num,time_interval=time_interval,space_interval=space_interval,\
             reactObject=positive_feedback, timepoint=(i+1)*time_interval)
@@ -83,9 +83,9 @@ for i in range(5001):
     Rac_inact_dist = new_Rac_inact_dist
     # record results in hdf5 file
     if i % 50 == 0:
-        with h5py.File(".\\data\\082824_testrun\\Act_Rac.h5",'a') as f:
+        with h5py.File(".\\data\\083024_testrun\\Act_Rac.h5",'a') as f:
             dset = f.create_dataset('act_dist_'+str(i),data=Rac_dist)
-        with h5py.File(".\\data\\082824_testrun\\Inact_Rac.h5",'a') as f:
+        with h5py.File(".\\data\\083024_testrun\\Inact_Rac.h5",'a') as f:
             dset = f.create_dataset('inact_dist_'+str(i),data=Rac_inact_dist)
 
 
