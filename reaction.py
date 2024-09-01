@@ -31,8 +31,8 @@ class Reaction:
 
     def square_initial_pulse(self,t,x,rho_act=0,rho_inact=0):
         # configure stimulus coefficients
-        addition = 10
-        t_end = 1
+        addition = 1.5
+        t_end = 20
         x_end = 5
         # stimulus expression
         if t < t_end and x < x_end:

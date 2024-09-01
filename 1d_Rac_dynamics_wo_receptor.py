@@ -20,11 +20,11 @@ compart_num = 100 # number of compartments we devide for simulation
 
 radius = compart_num * space_interval / 2 / np.pi # radius of the cell, assuming the cell has a round shape
 
-Rac_initial_unitnum = 5 # initial number of Rac molecules in each compartment
+Rac_initial_unitnum = 1 # initial number of Rac molecules in each compartment
 
-Rac_dist = np.linspace(Rac_initial_unitnum,Rac_initial_unitnum,compart_num)
+Rac_dist = np.linspace(0,0,compart_num)
 # Rac_dist = np.append(np.linspace(15,15,200),np.linspace(Rac_initial_unitnum,Rac_initial_unitnum,compart_num-200))
-Rac_inact_dist = np.linspace(int(Rac_initial_unitnum/2),int(Rac_initial_unitnum/2),compart_num)
+Rac_inact_dist = np.linspace(Rac_initial_unitnum,Rac_initial_unitnum,compart_num)
 
 Rac_total_num = np.sum(Rac_dist) + np.sum(Rac_inact_dist) # total number of Rac molecules
 
@@ -75,7 +75,7 @@ positive_feedback = Reaction()
 time_start = time.time()
 
 
-for i in range(60001):
+for i in range(100001):
     new_Rac_dist, new_Rac_inact_dist = pde2nd_Forward_time_centered_space(Rac_dist=Rac_dist, Rac_inact_dist=Rac_inact_dist, D_act=D_act, D_inact=D_inact, \
         compart_num=compart_num,time_interval=time_interval,space_interval=space_interval,\
             reactObject=positive_feedback, timepoint=(i+1)*time_interval)
