@@ -1,0 +1,10 @@
+D_act = 0.1
+D_inact = 1
+
+b0 = 1
+a0 = 0
+
+compartment number = 80
+
+trans loc
+S = 0.5

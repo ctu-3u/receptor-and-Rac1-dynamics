@@ -1,3 +1,5 @@
+import numpy as np
+
 class Reaction:
     def __init__(self):
         return
@@ -8,10 +10,16 @@ class Reaction:
         num_react = num_exchg + num_stimu
         return num_react
 
-    # Exchange expression
     def exchange(self,rho_act,rho_inact,t=0,x=0):
         num = self.positive_feedback_Hills(t=t,x=x,rho_act=rho_act,rho_inact=rho_inact)
         return num
+    
+    def stimulus(self,t,x,rho_act=0,rho_inact=0):
+        num = self.transient_localized_simuli(t=t,x=x,rho_act=rho_act,rho_inact=rho_inact)
+        return num
+
+
+    # Exchange expression
     
     def positive_feedback_Hills(self,rho_act,rho_inact,t=0,x=0):
         # configure reaction coefficients
@@ -25,20 +33,32 @@ class Reaction:
         return num_exchange
 
     # Stimulus expression
-    def stimulus(self,t,x,rho_act=0,rho_inact=0):
-        num = self.square_initial_pulse(t=t,x=x,rho_act=rho_act,rho_inact=rho_inact)
-        return num
-
+    
     def square_initial_pulse(self,t,x,rho_act=0,rho_inact=0):
         # configure stimulus coefficients
         addition = 1.5
         t_end = 20
-        x_end = 5
+        x_end = 1
         # stimulus expression
-        if t < t_end and x < x_end:
+        if t < t_end and x <= x_end:
             return addition
         return 0
 
+    def transient_localized_simuli(self,t,x,rho_act=0,rho_inact=0):
+        # configure stimulus coefficients
+        t1 = 20
+        t2 = 25
+        capS = 0.5
+        x_end = 1
+        if x >= 0 and x <= 2 * x_end:
+            if t <= t1:
+                st = capS/2
+            elif t <= t2:
+                st = capS/4 * (1 + np.cos(np.pi*(t-t1)/(t2-t1)))
+            else:
+                return 0
+            return st * (1 + np.cos(np.pi*x))
+        return 0
 
     # Test for non-reaction expression
     def zerotest(self,t,x,rho_act=0,rho_inact=0):

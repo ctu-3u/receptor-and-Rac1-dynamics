@@ -1,0 +1,12 @@
+D_act = 0.1
+D_inact = 1
+
+b0 = 1
+a0 = 0
+
+compartment number = 80
+
+square
+add = 1.5
+t = 20
+x = 1
