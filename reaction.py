@@ -11,11 +11,11 @@ class Reaction:
         return num_react
 
     def exchange(self,rho_act,rho_inact,t=0,x=0):
-        num = self.positive_feedback_Hills(t=t,x=x,rho_act=rho_act,rho_inact=rho_inact)
+        num = self.positive_feedback_Hills(rho_act=rho_act,rho_inact=rho_inact,t=t,x=x)
         return num
     
     def stimulus(self,t,x,rho_act=0,rho_inact=0):
-        num = self.transient_localized_simuli(t=t,x=x,rho_act=rho_act,rho_inact=rho_inact)
+        num = self.zerotest(t=t,x=x,rho_act=rho_act,rho_inact=rho_inact)
         return num
 
 

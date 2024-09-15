@@ -19,14 +19,17 @@ space_interval = 0.25
 # system parameters
 
 compart_num = 80 # number of compartments we devide for simulation
+total_number_C = 170 # total number of active and inactive Rac
+
+initial_stimulus = 1
+initial_broad = 16
+initial_inact = (total_number_C - initial_broad*initial_stimulus) / compart_num
 
 radius = compart_num * space_interval / 2 / np.pi # radius of the cell, assuming the cell has a round shape
 
-Rac_initial_unitnum = 1 # initial number of Rac molecules in each compartment
-
-Rac_dist = np.linspace(0,0,compart_num)
+Rac_dist = np.append(np.linspace(initial_stimulus,initial_stimulus,initial_broad),np.linspace(0,0,compart_num-initial_broad))
 # Rac_dist = np.append(np.linspace(15,15,200),np.linspace(Rac_initial_unitnum,Rac_initial_unitnum,compart_num-200))
-Rac_inact_dist = np.linspace(Rac_initial_unitnum,Rac_initial_unitnum,compart_num)
+Rac_inact_dist = np.linspace(initial_inact,initial_inact,compart_num)
 
 Rac_total_num = np.sum(Rac_dist) + np.sum(Rac_inact_dist) # total number of Rac molecules
 
@@ -62,7 +65,7 @@ def pde2nd_Forward_time_centered_space(Rac_dist, Rac_inact_dist, D_act, D_inact,
             new_Rac_dist[i] = 0
 
         space_diff = D_inact * (Rac_inact_dist[forstep] + Rac_inact_dist[backstep] - Rac_inact_dist[i] * 2) / space_interval / space_interval
-        new_Rac_inact_dist[i] = (space_diff - reaction_number) * time_interval + Rac_inact_dist[i]
+        new_Rac_inact_dist[i] = (space_diff - reaction_number - stimulus_number) * time_interval + Rac_inact_dist[i]
         if new_Rac_inact_dist[i] < 0:
             new_Rac_inact_dist[i] = 0
     return new_Rac_dist, new_Rac_inact_dist
@@ -88,9 +91,9 @@ for i in range(spa.rounds):
     Rac_inact_dist = new_Rac_inact_dist
     # record results in hdf5 file
     if i % spa.sampot == 0:
-        with h5py.File(".\\data\\"+spa.datelabel+"_testrun\\Act_Rac.h5",'a') as f:
+        with h5py.File(".\\data\\"+spa.datelabel + "\\Act_Rac.h5",'a') as f:
             dset = f.create_dataset('act_dist_'+str(i),data=Rac_dist)
-        with h5py.File(".\\data\\"+spa.datelabel+"_testrun\\Inact_Rac.h5",'a') as f:
+        with h5py.File(".\\data\\"+spa.datelabel + "\\Inact_Rac.h5",'a') as f:
             dset = f.create_dataset('inact_dist_'+str(i),data=Rac_inact_dist)
 
 

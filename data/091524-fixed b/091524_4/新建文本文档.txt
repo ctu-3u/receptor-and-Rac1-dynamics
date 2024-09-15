@@ -1,0 +1,9 @@
+D_act = 0.1
+D_inact = 1
+
+a0 = 1 * 16
+C = 200
+
+compartment number = 80
+
+b = constant
