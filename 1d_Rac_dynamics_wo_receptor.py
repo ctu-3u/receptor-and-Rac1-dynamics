@@ -13,15 +13,15 @@ import simu_para as spa
 #######
 # simulation parameters
 
-time_interval = 0.01
-space_interval = 0.25
+time_interval = 0.01 # unit: s
+space_interval = 0.25 # unit: um
 
 # system parameters
 
 compart_num = 80 # number of compartments we devide for simulation
-total_number_C = 170 # total number of active and inactive Rac
+total_number_C = 200 # total number of active and inactive Rac
 
-initial_stimulus = 1
+initial_stimulus = 0
 initial_broad = 16
 initial_inact = (total_number_C - initial_broad*initial_stimulus) / compart_num
 
@@ -39,7 +39,7 @@ D_inact = 1
 #######
 # Modules
 # FTCS scheme solution
-def pde2nd_Forward_time_centered_space(Rac_dist, Rac_inact_dist, D_act, D_inact, reactObject, compart_num, time_interval, space_interval,timepoint):
+def pde2nd_Forward_time_centered_space(Rac_dist, Rac_inact_dist, D_act, D_inact, reactObject, compart_num, time_interval, space_interval):
     new_Rac_dist = np.zeros(compart_num)
     new_Rac_inact_dist = np.zeros(compart_num)
     for i in range(compart_num):
@@ -55,8 +55,9 @@ def pde2nd_Forward_time_centered_space(Rac_dist, Rac_inact_dist, D_act, D_inact,
         # space_diff = 0
 
         spacepoint = (i+1)*space_interval
+        timepoint = (i+1)*time_interval
 
-        reaction_number = reactObject.exchange(Rac_dist[i],Rac_inact_dist[i])
+        reaction_number = reactObject.exchange(Rac_dist[i],Rac_inact_dist[i]) + reactObject.receptor_signal(i,compart_num)
         stimulus_number = reactObject.stimulus(t=timepoint,x=spacepoint)
 
         space_diff = D_act * (Rac_dist[forstep] + Rac_dist[backstep] - Rac_dist[i] * 2) / space_interval / space_interval
@@ -86,7 +87,7 @@ time_start = time.time()
 for i in range(spa.rounds):
     new_Rac_dist, new_Rac_inact_dist = pde2nd_Forward_time_centered_space(Rac_dist=Rac_dist, Rac_inact_dist=Rac_inact_dist, D_act=D_act, D_inact=D_inact, \
         compart_num=compart_num,time_interval=time_interval,space_interval=space_interval,\
-            reactObject=positive_feedback, timepoint=(i+1)*time_interval)
+            reactObject=positive_feedback)
     Rac_dist = new_Rac_dist
     Rac_inact_dist = new_Rac_inact_dist
     # record results in hdf5 file

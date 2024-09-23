@@ -1,0 +1,6 @@
+C = 200
+
+gradients:
+c0 = 1
+        K_d = 0.5
+        rho_rec = 1
