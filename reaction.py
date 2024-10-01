@@ -32,16 +32,16 @@ class Reaction:
         num_exchange = rho_inact * rate_exchange - delta*rho_act
         return num_exchange
 
-    def receptor_signal(self, x_i, num_compart):
+    def receptor_signal(self, x_i, num_compart, rho_inact):
         ## effect of receptor binding under signal gradient
         # configure reaction coefficients
-        c0 = 0.1
-        K_d = 0.5
+        c0 = 0.01
+        K_d = 1
         rho_rec = 1
         # concerntration
         c_xi = c0 / 2 * (1 - np.cos(2 * np.pi * x_i / num_compart))
         # receptor binding
-        return c_xi / (c_xi + K_d) * rho_rec
+        return c_xi / (c_xi + K_d) * rho_rec * rho_inact
 
     # Stimulus expression
     

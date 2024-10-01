@@ -1,0 +1,40 @@
+C = 200
+
+01：
+gradients:
+c0 = 0.01
+        K_d = 0.01
+        rho_rec = 1
+
+02：
+gradients:
+c0 = 0.01
+        K_d = 0.05
+        rho_rec = 1
+
+03：
+gradients:
+c0 = 0.01
+        K_d = 0.1
+        rho_rec = 1
+
+04：
+gradients:
+c0 = 0.01
+        K_d = 0.25
+        rho_rec = 1
+
+05：
+gradients:
+c0 = 0.01
+        K_d = 0.5
+        rho_rec = 1
+
+06：
+gradients:
+c0 = 0.01
+        K_d = 1
+        rho_rec = 1
+
+
+

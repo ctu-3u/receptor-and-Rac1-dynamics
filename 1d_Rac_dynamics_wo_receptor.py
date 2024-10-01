@@ -57,7 +57,8 @@ def pde2nd_Forward_time_centered_space(Rac_dist, Rac_inact_dist, D_act, D_inact,
         spacepoint = (i+1)*space_interval
         timepoint = (i+1)*time_interval
 
-        reaction_number = reactObject.exchange(Rac_dist[i],Rac_inact_dist[i]) + reactObject.receptor_signal(i,compart_num)
+        ### configure your reactions and exchanges and stimulus
+        reaction_number = reactObject.exchange(Rac_dist[i],Rac_inact_dist[i]) + reactObject.receptor_signal(i,compart_num,Rac_inact_dist[i])
         stimulus_number = reactObject.stimulus(t=timepoint,x=spacepoint)
 
         space_diff = D_act * (Rac_dist[forstep] + Rac_dist[backstep] - Rac_dist[i] * 2) / space_interval / space_interval
