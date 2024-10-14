@@ -1,0 +1,52 @@
+C = 200
+
+01：
+gradients:
+blank initial condition
+c0 = 0.01
+        K_d = 10
+        rho_rec = 1
+
+02：
+gradients:
+blank initial condition
+c0 = 0.01
+        K_d = 20
+        rho_rec = 1
+
+03：
+gradients:
+blank initial condition
+c0 = 0.01
+        K_d = 5
+        rho_rec = 1
+
+04：
+gradients:
+blank initial condition
+c0 = 0.01
+        K_d = 10
+        rho_rec = 5
+
+05：
+initial condition:
+initial_stimulus = 0.01
+initial_broad = 16 (starting from 0 point)
+
+gradients:
+c0 = 0.01
+        K_d = 10
+        rho_rec = 1
+
+06：
+initial condition:
+initial_stimulus = 0.1
+initial_broad = 16 (starting from 0 point)
+
+gradients:
+c0 = 0.01
+        K_d = 10
+        rho_rec = 1
+
+
+

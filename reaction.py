@@ -36,8 +36,8 @@ class Reaction:
         ## effect of receptor binding under signal gradient
         # configure reaction coefficients
         c0 = 0.01
-        K_d = 1
-        rho_rec = 1
+        K_d = 10
+        rho_rec = 0
         # concerntration
         c_xi = c0 / 2 * (1 - np.cos(2 * np.pi * x_i / num_compart))
         # receptor binding

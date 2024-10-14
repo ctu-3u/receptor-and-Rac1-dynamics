@@ -21,7 +21,7 @@ space_interval = 0.25 # unit: um
 compart_num = 80 # number of compartments we devide for simulation
 total_number_C = 200 # total number of active and inactive Rac
 
-initial_stimulus = 0
+initial_stimulus = 1
 initial_broad = 16
 initial_inact = (total_number_C - initial_broad*initial_stimulus) / compart_num
 
