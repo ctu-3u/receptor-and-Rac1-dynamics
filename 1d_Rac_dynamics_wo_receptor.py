@@ -13,16 +13,16 @@ import simu_para as spa
 #######
 # simulation parameters
 
-time_interval = 0.01 # unit: s
-space_interval = 0.25 # unit: um
+time_interval = spa.time_interval # unit: s
+space_interval = spa.space_interval # unit: um
 
 # system parameters
 
-compart_num = 80 # number of compartments we devide for simulation
-total_number_C = 200 # total number of active and inactive Rac
+compart_num = spa.compart_num # number of compartments we devide for simulation
+total_number_C = spa.total_number_C # total number of active and inactive Rac
 
-initial_stimulus = 1
-initial_broad = 16
+initial_stimulus = spa.initial_stimulus
+initial_broad = spa.initial_broad
 initial_inact = (total_number_C - initial_broad*initial_stimulus) / compart_num
 
 radius = compart_num * space_interval / 2 / np.pi # radius of the cell, assuming the cell has a round shape
@@ -33,8 +33,8 @@ Rac_inact_dist = np.linspace(initial_inact,initial_inact,compart_num)
 
 Rac_total_num = np.sum(Rac_dist) + np.sum(Rac_inact_dist) # total number of Rac molecules
 
-D_act = 0.1
-D_inact = 1
+D_act = spa.D_act
+D_inact = spa.D_inact
 
 #######
 # Modules
