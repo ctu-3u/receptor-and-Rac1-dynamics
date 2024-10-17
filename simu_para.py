@@ -18,7 +18,7 @@ D_inact = 1
 
 # Simulation running configuration
 
-rounds = 1200001
+rounds = 600001
 sampot = 1000
 
 data_archives = "101624_inits"
