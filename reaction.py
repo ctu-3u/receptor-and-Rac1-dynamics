@@ -35,9 +35,9 @@ class Reaction:
     def receptor_signal(self, x_i, num_compart, rho_inact):
         ## effect of receptor binding under signal gradient
         # configure reaction coefficients
-        c0 = 0.01
-        K_d = 10
-        rho_rec = 0
+        c0 = 0.04
+        K_d = 5
+        rho_rec = 1
         # concerntration
         c_xi = c0 / 2 * (1 - np.cos(2 * np.pi * x_i / num_compart))
         # receptor binding

@@ -93,9 +93,9 @@ for i in range(spa.rounds):
     Rac_inact_dist = new_Rac_inact_dist
     # record results in hdf5 file
     if i % spa.sampot == 0:
-        with h5py.File(".\\data\\"+spa.datelabel + "\\Act_Rac.h5",'a') as f:
+        with h5py.File(".\\data\\" + spa.data_archives + "\\Act_Rac_" + spa.data_number + ".h5",'a') as f:
             dset = f.create_dataset('act_dist_'+str(i),data=Rac_dist)
-        with h5py.File(".\\data\\"+spa.datelabel + "\\Inact_Rac.h5",'a') as f:
+        with h5py.File(".\\data\\" + spa.data_archives + "\\Inact_Rac_" + spa.data_number + ".h5",'a') as f:
             dset = f.create_dataset('inact_dist_'+str(i),data=Rac_inact_dist)
 
 
