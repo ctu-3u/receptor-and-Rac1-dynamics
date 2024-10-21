@@ -19,8 +19,9 @@ class Reaction:
         return num
 
 
-    # Exchange expression
+    ## Exchange expression
     
+    # Hills positive feedback exchange
     def positive_feedback_Hills(self,rho_act,rho_inact,t=0,x=0):
         # configure reaction coefficients
         k_0 = 0.067
@@ -32,6 +33,7 @@ class Reaction:
         num_exchange = rho_inact * rate_exchange - delta*rho_act
         return num_exchange
 
+    # Receptor binding (determinant)
     def receptor_signal(self, x_i, num_compart, rho_inact):
         ## effect of receptor binding under signal gradient
         # configure reaction coefficients
@@ -43,7 +45,25 @@ class Reaction:
         # receptor binding
         return c_xi / (c_xi + K_d) * rho_rec * rho_inact
 
-    # Stimulus expression
+    # Receptor binding (stochastic)
+    def receptor_random(self, x_i, num_compart, rho_inact):
+        # gradient parameter
+        c0 = 1
+        p = 0.04
+        phi = np.pi
+        # bind parameter
+        K_d = 5
+        rho_rec = 1
+        # calculate binding probability
+        conc_x = c0 * np.exp(p / 2 * np.cos(2 * np.pi * x_i / num_compart - phi))
+        p_threshold = conc_x / (conc_x + K_d)
+
+        random_numbers = np.random.rand(rho_rec)
+        
+        return rho_rec * ratio
+    
+
+    ## Stimulus expression
     
     def square_initial_pulse(self,t,x,rho_act=0,rho_inact=0):
         # configure stimulus coefficients
