@@ -1,0 +1,67 @@
+C = 200
+
+Randomly bind receptors
+
+initial_stimulus = 0.5
+initial_broad = 16
+
+01：
+gradients:
+c0 = 0.04
+        p = 1
+        phi = np.pi
+K_d = 5
+        rho_rec = 5
+rounds = 100001
+sampot = 100
+
+02：
+ c0 = 0.04
+        p = 0.5
+        phi = np.pi
+        K_d = 5
+        rho_rec = 5
+rounds = 50001
+sampot = 100
+
+03：
+ c0 = 0.04
+        p = 1
+        phi = np.pi / 2
+        # bind parameter
+        K_d = 5
+        rho_rec = 5
+rounds = 50001
+sampot = 100
+
+】】
+
+04：
+gradients:
+blank initial condition
+c0 = 0.01
+        K_d = 10
+        rho_rec = 5
+
+05：
+initial condition:
+initial_stimulus = 0.01
+initial_broad = 16 (starting from 0 point)
+
+gradients:
+c0 = 0.01
+        K_d = 10
+        rho_rec = 1
+
+06：
+initial condition:
+initial_stimulus = 0.1
+initial_broad = 16 (starting from 0 point)
+
+gradients:
+c0 = 0.01
+        K_d = 10
+        rho_rec = 1
+
+
+

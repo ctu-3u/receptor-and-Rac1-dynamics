@@ -48,19 +48,18 @@ class Reaction:
     # Receptor binding (stochastic)
     def receptor_random(self, x_i, num_compart, rho_inact):
         # gradient parameter
-        c0 = 1
-        p = 0.04
-        phi = np.pi
+        c0 = 0.04
+        p = 1
+        phi = np.pi / 2
         # bind parameter
         K_d = 5
-        rho_rec = 1
+        rho_rec = 5
         # calculate binding probability
         conc_x = c0 * np.exp(p / 2 * np.cos(2 * np.pi * x_i / num_compart - phi))
         p_threshold = conc_x / (conc_x + K_d)
-
-        random_numbers = np.random.rand(rho_rec)
-        
-        return rho_rec * ratio
+        # number of randomly bounded receptors
+        n_rec_bound = self.random_pass_test(rho_rec, p_threshold)
+        return n_rec_bound
     
 
     ## Stimulus expression
@@ -94,3 +93,10 @@ class Reaction:
     # Test for non-reaction expression
     def zerotest(self,t,x,rho_act=0,rho_inact=0):
         return 0
+
+    # Backup functions
+    def random_pass_test(self, n_rec, prob):
+        np.random.seed()
+        t = np.random.rand(n_rec)
+        passed = np.sum(t < prob)
+        return passed

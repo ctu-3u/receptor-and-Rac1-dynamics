@@ -18,9 +18,9 @@ D_inact = 1
 
 # Simulation running configuration
 
-rounds = 600001
-sampot = 1000
+rounds = 50001
+sampot = 100
 
-data_archives = "101624_inits"
-data_number = "4"
-datelabel = "101624_inits" + "/" + data_number
+data_archives = "102224_pre"
+data_number = "3"
+datelabel = data_archives + "/" + data_number
