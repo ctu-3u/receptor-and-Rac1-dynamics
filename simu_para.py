@@ -21,6 +21,13 @@ D_inact = 1
 rounds = 50001
 sampot = 100
 
+# Theoretical running configuration
+
+theo_rounds = 100
+
+
+# File saving path
+
 data_archives = "102224_pre"
 data_number = "3"
 datelabel = data_archives + "/" + data_number
