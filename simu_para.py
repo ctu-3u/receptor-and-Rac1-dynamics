@@ -28,6 +28,6 @@ theo_rounds = 100
 
 # File saving path
 
-data_archives = "102224_pre"
-data_number = "3"
+data_archives = "102924"
+data_number = "16"
 datelabel = data_archives + "/" + data_number

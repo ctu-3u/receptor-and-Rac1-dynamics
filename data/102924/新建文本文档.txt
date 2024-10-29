@@ -1,0 +1,211 @@
+C = 200
+
+Randomly bind receptors
+
+01：
+# gradient parameters    
+    c0 = 0.04
+    p = 1
+    phi = np.pi / 2
+    # bind parameters
+    K_d = 5
+
+rho_receptor = 10
+theo_rounds = 500
+
+Est p: 1.652560668226986, Est phi: -0.003777191445667185
+
+02：
+ # gradient parameters    
+    c0 = 0.04
+    p = 1
+    phi = np.pi / 4
+    # bind parameters
+    K_d = 5
+
+rho_receptor = 10
+theo_rounds = 500
+
+Est p: 1.7720362775925569, Est phi: 0.20893895696318632
+
+03：
+# gradient parameters    
+    c0 = 0.04
+    p = 1
+    phi = np.pi / 4
+    # bind parameters
+    K_d = 5
+
+rho_receptor = 10
+theo_rounds = 500
+
+Est p: 1.6602532641851557, Est phi: 0.145214410246312
+
+04：
+# gradient parameters    
+    c0 = 0.04
+    p = 1
+    phi = np.pi / 4
+    # bind parameters
+    K_d = 5
+
+rho_receptor = 30
+theo_rounds = 500
+
+Est p: 1.2277610165027986, Est phi: 0.41956527169010904
+
+05：
+# gradient parameters    
+    c0 = 0.04
+    p = 1
+    phi = np.pi / 4
+    # bind parameters
+    K_d = 5
+
+rho_receptor = 50
+theo_rounds = 100
+
+Est p: 1.0892324401294546, Est phi: 0.5658705878929314
+
+06：
+# gradient parameters    
+    c0 = 0.04
+    p = 1
+    phi = np.pi / 4
+    # bind parameters
+    K_d = 5
+
+rho_receptor = 100
+theo_rounds = 50
+
+Est p: 1.0003404762883286, Est phi: 0.6680436038020915
+
+07：
+# gradient parameters    
+    c0 = 0.04
+    p = 1
+    phi = np.pi / 4
+    # bind parameters
+    K_d = 5
+
+rho_receptor = 150
+theo_rounds = 50
+
+Est p: 1.0551569699017935, Est phi: 0.7014777052223512
+
+08：
+# gradient parameters    
+    c0 = 0.04
+    p = 1
+    phi = np.pi / 4
+    # bind parameters
+    K_d = 5
+
+rho_receptor = 150
+theo_rounds = 50
+
+Est p: 1.0595125067224067, Est phi: 0.7453303421723205
+
+09：
+# gradient parameters    
+    c0 = 0.04
+    p = 1
+    phi = np.pi / 4
+    # bind parameters
+    K_d = 5
+
+rho_receptor = 150
+theo_rounds = 50
+
+Est p: 1.1068567989636549, Est phi: 0.798524957749578
+
+10：
+# gradient parameters    
+    c0 = 0.04
+    p = 1
+    phi = np.pi / 4
+    # bind parameters
+    K_d = 5
+
+rho_receptor = 150
+theo_rounds = 50
+
+Est p: 1.0420966631622448, Est phi: 0.7066706187161135
+
+11：
+# gradient parameters    
+    c0 = 0.04
+    p = 1
+    phi = np.pi / 4
+    # bind parameters
+    K_d = 5
+
+rho_receptor = 200
+theo_rounds = 50
+
+Est p: 1.1014542081661838, Est phi: 0.7532634626068351
+
+12：
+# gradient parameters    
+    c0 = 0.04
+    p = 1
+    phi = np.pi / 4
+    # bind parameters
+    K_d = 5
+
+rho_receptor = 200
+theo_rounds = 50
+
+Est p: 1.0638596851647086, Est phi: 0.8197759313321477
+
+13：
+# gradient parameters    
+    c0 = 0.04
+    p = 1
+    phi = np.pi / 4
+    # bind parameters
+    K_d = 5
+
+rho_receptor = 200
+theo_rounds = 50
+
+Est p: 1.0683390159258976, Est phi: 0.7877931431010948
+
+14：
+# gradient parameters    
+    c0 = 0.04
+    p = 1
+    phi = np.pi / 4
+    # bind parameters
+    K_d = 5
+
+rho_receptor = 200
+theo_rounds = 50
+
+Est p: 1.0138967592158583, Est phi: 0.7218417873677382
+
+15：
+# gradient parameters    
+    c0 = 0.04
+    p = 1
+    phi = np.pi / 4
+    # bind parameters
+    K_d = 5
+
+rho_receptor = 1000
+theo_rounds = 10
+
+Est p: 1.0407402144564801, Est phi: 0.779794550141979
+
+16：
+# gradient parameters    
+    c0 = 0.04
+    p = 1
+    phi = np.pi / 4
+    # bind parameters
+    K_d = 5
+
+rho_receptor = 1000
+theo_rounds = 100
+
+Est p: 1.0503025938039476, Est phi: 0.7775431221786938

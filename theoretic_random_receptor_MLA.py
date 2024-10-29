@@ -10,7 +10,7 @@ import simu_para as spa
 #===============================================================#
 ## receptor normally distribute along the membrane
 compart_num = spa.compart_num
-rho_receptor = 10
+rho_receptor = 1000
 num_receptor = rho_receptor * compart_num
 
 ## record the receptors binding or unbinding states
@@ -24,7 +24,7 @@ class Gradient:
     # gradient parameters    
     c0 = 0.04
     p = 1
-    phi = np.pi / 2
+    phi = np.pi / 4
     # bind parameters
     K_d = 5
 
@@ -70,16 +70,21 @@ def MLA_estimation(num_receptor, gradi, binding_states):
     param_mu = num_receptor * gradi.c0 * gradi.K_d / 4 / np.power(gradi.c0 + gradi.K_d, 2)
 
     est_p = np.sqrt(z1 * z1 + z2 * z2) / param_mu
-    if z1 != 0:
-        est_phi = np.arctan(z2 / z1)
-    elif z2 >= 0:
-        est_phi = np.pi / 2
-    else:
-        est_phi = - np.pi / 2
-    
 
+    if z1 == 0 and z2 == 0:
+        est_phi = 0
+    elif z1 == 0 and z2 > 0:
+        est_phi = np.pi / 2
+    elif z1 == 0 and z2 < 0:
+        est_phi = -np.pi / 2
+    else:
+        est_phi = np.arctan(z2 / z1)
+    
     est_p_std = np.sqrt(2 / param_mu)
-    est_phi_std = np.sqrt( 2 / param_mu / est_p / est_p)
+    if est_p == 0:
+        est_phi_std = 0
+    else:
+        est_phi_std = np.sqrt( 2 / param_mu / est_p / est_p)
 
     return est_p, est_phi, est_p_std, est_phi_std
 
@@ -95,6 +100,17 @@ for i in range(rounds):
 
     p_s[i], phi_s[i], pstd_s[i], phistd_s[i] = MLA_estimation(num_receptor, gradi, binding_states[:])
 
-# plt.errorbar(np.arange(rounds), p_s, yerr=pstd_s, fmt='-o', ecolor='red', capsize=5, label='p estimated')
-plt.errorbar(np.arange(rounds), phi_s, yerr=phistd_s, fmt='-o', ecolor='blue', capsize=5, label='\u03C6 estimated')
-plt.show()
+with h5py.File(".\\data\\" + spa.data_archives + "\\Estimation_" + spa.data_number + ".h5",'a') as f:
+    dset1 = f.create_dataset('p_est', data=p_s)
+    dset2 = f.create_dataset('phi_est', data=phi_s)
+    dset3 = f.create_dataset('pstd_est', data=pstd_s)
+    dset4 = f.create_dataset('phistd_est', data=phistd_s)
+
+
+plt.errorbar(np.arange(rounds), p_s, yerr=pstd_s, fmt='-', ecolor='red', capsize=5, label='p estimated')
+plt.savefig(".\\data\\" + spa.data_archives + "\\p_estimation_" + spa.data_number + ".png")
+plt.clf()
+plt.errorbar(np.arange(rounds), phi_s, yerr=phistd_s, fmt='-', ecolor='blue', capsize=5, label='\u03C6 estimated')
+plt.savefig(".\\data\\" + spa.data_archives + "\\phi_estimation_" + spa.data_number + ".png")
+
+print(f"Est p: {np.average(p_s)}, Est phi: {np.average(phi_s)}")
