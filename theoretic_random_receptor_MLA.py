@@ -7,32 +7,22 @@ import matplotlib.pyplot as plt
 
 import simu_para as spa
 
+t0 = time.time()
+
 #===============================================================#
 ## receptor normally distribute along the membrane
 compart_num = spa.compart_num
-rho_receptor = 1000
+rho_receptor = spa.rho_receptor
 num_receptor = rho_receptor * compart_num
 
 ## record the receptors binding or unbinding states
 binding_states = np.zeros(num_receptor)
 
 ## Signal gradient parameters
-class Gradient:
-    def __init__(self):
-        return
-
-    # gradient parameters    
-    c0 = 0.04
-    p = 1
-    phi = np.pi / 4
-    # bind parameters
-    K_d = 5
-
-gradi = Gradient()
+gradi = spa.Gradient()
 
 ## Runing rounds
 rounds = spa.theo_rounds
-
 
 #===============================================================#
 
@@ -105,6 +95,8 @@ with h5py.File(".\\data\\" + spa.data_archives + "\\Estimation_" + spa.data_numb
     dset2 = f.create_dataset('phi_est', data=phi_s)
     dset3 = f.create_dataset('pstd_est', data=pstd_s)
     dset4 = f.create_dataset('phistd_est', data=phistd_s)
+    dset5 = f.create_dataset('p_ave', data=np.average(p_s))
+    dset5 = f.create_dataset('phi_ave', data=np.average(phi_s))
 
 
 plt.errorbar(np.arange(rounds), p_s, yerr=pstd_s, fmt='-', ecolor='red', capsize=5, label='p estimated')
@@ -113,4 +105,8 @@ plt.clf()
 plt.errorbar(np.arange(rounds), phi_s, yerr=phistd_s, fmt='-', ecolor='blue', capsize=5, label='\u03C6 estimated')
 plt.savefig(".\\data\\" + spa.data_archives + "\\phi_estimation_" + spa.data_number + ".png")
 
+
+
 print(f"Est p: {np.average(p_s)}, Est phi: {np.average(phi_s)}")
+
+print(time.time() - t0)

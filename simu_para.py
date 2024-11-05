@@ -1,3 +1,5 @@
+import numpy as np
+
 
 # System configuration
 
@@ -15,6 +17,18 @@ initial_broad = 16
 D_act = 0.1
 D_inact = 1
 
+# Signal gradient
+class Gradient:
+    def __init__(self):
+        return
+
+    # gradient parameters    
+    c0 = 0.21
+    p = 1
+    phi = np.pi / 4
+    # bind parameters
+    K_d = 5
+
 
 # Simulation running configuration
 
@@ -23,11 +37,12 @@ sampot = 100
 
 # Theoretical running configuration
 
-theo_rounds = 100
+theo_rounds = 150
+rho_receptor = 150
 
 
 # File saving path
 
-data_archives = "102924"
-data_number = "16"
+data_archives = "110524"
+data_number = "21"
 datelabel = data_archives + "/" + data_number
