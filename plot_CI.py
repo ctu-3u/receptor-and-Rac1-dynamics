@@ -45,9 +45,10 @@ while True:
     ci_s.append(ci)
 
 # plot CI
-plt.plot(np.arange(1, num_samples+1) * 0.01, ci_s, 'b.-')
+plt.plot(spa.variable_list, ci_s, 'b.-')
+plt.xscale('log')
 plt.xlabel("c0")
 plt.ylabel("CI")
-plt.xticks(np.arange(1, num_samples+1) * 0.01, fontsize=6)
+plt.xticks(spa.variable_list, fontsize=6)
 plt.savefig(".\\data\\" + spa.data_archives + "\\CI" + ".png")
 plt.show()

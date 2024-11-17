@@ -23,7 +23,7 @@ class Gradient:
         return
 
     # gradient parameters    
-    c0 = 10
+    c0 = 10000
     p = 1
     phi = np.pi / 4
     # bind parameters
@@ -40,9 +40,11 @@ sampot = 100
 theo_rounds = 150
 rho_receptor = 150
 
+variable_list = [0.01, 0.05, 0.1, 0.5, 1, 5, 10, 50, 100, 500, 1000, 5000, 10000]
+
 
 # File saving path
 
 data_archives = "111724"
-data_number = "7"
+data_number = "13"
 datelabel = data_archives + "/" + data_number
