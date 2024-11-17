@@ -23,7 +23,7 @@ class Gradient:
         return
 
     # gradient parameters    
-    c0 = 0.21
+    c0 = 10
     p = 1
     phi = np.pi / 4
     # bind parameters
@@ -43,6 +43,6 @@ rho_receptor = 150
 
 # File saving path
 
-data_archives = "110524"
-data_number = "21"
+data_archives = "111724"
+data_number = "7"
 datelabel = data_archives + "/" + data_number
