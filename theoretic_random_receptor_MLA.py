@@ -67,8 +67,10 @@ def MLA_estimation(num_receptor, gradi, binding_states):
         est_phi = np.pi / 2
     elif z1 == 0 and z2 < 0:
         est_phi = -np.pi / 2
-    else:
+    elif z1 > 0:
         est_phi = np.arctan(z2 / z1)
+    elif z1 < 0:
+        est_phi = np.pi + np.arctan(z2 / z1)
     
     est_p_std = np.sqrt(2 / param_mu)
     if gradi.p == 0:
