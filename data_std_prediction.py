@@ -85,3 +85,10 @@ plt.xscale('log')
 plt.title("Estimation Quality")
 plt.savefig(".\\data\\" + spa.data_archives + "\\Esti_Qual" + ".png")
 plt.show()
+
+####
+plt.plot(c0s, phi_std_e, label = 'esti')
+plt.plot(c0s, phi_std_t, label = 'theo')
+plt.xscale('log')
+plt.legend()
+plt.show()
