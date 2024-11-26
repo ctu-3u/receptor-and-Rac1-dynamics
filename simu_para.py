@@ -2,17 +2,17 @@ import numpy as np
 
 # File saving path
 
-data_archives = "111924"
-data_number_int = 13
+data_archives = "112524"
+data_number_int = 1
 data_number = str(data_number_int)
 datelabel = data_archives + "/" + data_number
 
 # Theoretical running configuration
 
-theo_rounds = 150
-rho_receptor = 150
+rho_receptor = 300
+theo_rounds = 10
 
-variable_list = [0.01, 0.05, 0.1, 0.5, 1, 5, 10, 50, 100, 500, 1000, 5000, 10000]
+variable_list = [0.01, 0.1, 0.5, 1, 50, 500, 1000, 5000, 10000]
 
 # System configuration
 
@@ -37,8 +37,8 @@ class Gradient:
 
     # gradient parameters    
     c0 = variable_list[data_number_int - 1]
-    p = 2
-    phi = 2 * np.pi / 3
+    p = 0.2
+    phi = np.pi / 3
     # bind parameters
     K_d = 5
 

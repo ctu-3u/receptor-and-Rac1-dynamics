@@ -1,0 +1,15 @@
+C = 200
+
+Randomly bind receptors
+# gradient parameters  
+    p = 0.2
+    phi = np.pi / 3
+    # bind parameters
+    K_d = 5
+
+rho_receptor = 300
+theo_rounds = 10
+
+
+c0 = 
+0.01, 0.1, 0.5, 1, 50, 500, 1000, 5000, 10000
