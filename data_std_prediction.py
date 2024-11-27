@@ -7,8 +7,8 @@ import simu_para as spa
 
 #===============================================================#
 ## simulation numbers =
-simulateds = 4
-simurounds = 10
+simulateds = spa.dataset_number_int
+simurounds = spa.theo_rounds
 
 ## receptor normally distribute along the membrane
 compart_num = spa.compart_num
@@ -97,8 +97,8 @@ def visualization(simulated_nume, p_diffs, p_std_t, p_std_e, phi_diffs, phi_std_
     plt.plot(c0s, [phi_diffs[i] / phi_std_t[i] for i in range(len(phi_std_t))], '.-', label = "phi")
     plt.legend()
     plt.xscale('log')
-    plt.title("Estimation Quality " + str(simulated_nume * simurounds))
-    plt.savefig(".\\data\\" + spa.data_archives + "_0\\Esti_Qual_" + str(simulated_nume * simurounds) + ".png")
+    plt.title("Estimation Accuracy " + str(simulated_nume * simurounds))
+    plt.savefig(".\\data\\" + spa.data_archives + "_0\\Esti_Accu_" + str(simulated_nume * simurounds) + ".png")
     plt.show()
     plt.clf()
 
@@ -107,10 +107,12 @@ def visualization(simulated_nume, p_diffs, p_std_t, p_std_e, phi_diffs, phi_std_
     plt.plot(c0s, phi_std_t, label = 'theo')
     plt.xscale('log')
     plt.legend()
+    plt.title("Estimation Quality " + str(simulated_nume * simurounds))
+    plt.savefig(".\\data\\" + spa.data_archives + "_0\\Esti_Qual_" + str(simulated_nume * simurounds) + ".png")
     plt.show()
     plt.clf()
 
-#=====================Run==============================#
+#=====================MAIN==============================#
 for simutimes in range(1, simulateds + 1):
     p_diffs, p_std_t, p_std_e, phi_diffs, phi_std_t, phi_std_e = predicts(simutimes, simurounds)
 

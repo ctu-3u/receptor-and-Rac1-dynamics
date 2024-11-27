@@ -92,7 +92,7 @@ for i in range(rounds):
 
     p_s[i], phi_s[i], pstd_s[i], phistd_s[i] = MLA_estimation(num_receptor, gradi, binding_states[:])
 
-with h5py.File(".\\data\\" + spa.data_archives + "\\Estimation_" + spa.data_number + ".h5",'a') as f:
+with h5py.File(".\\data\\" + spa.data_archives + "_" + str(spa.dataset_number) + "\\Estimation_" + spa.data_number + ".h5",'a') as f:
     dset1 = f.create_dataset('p_est', data=p_s)
     dset2 = f.create_dataset('phi_est', data=phi_s)
     dset3 = f.create_dataset('pstd_est', data=pstd_s)
@@ -102,10 +102,10 @@ with h5py.File(".\\data\\" + spa.data_archives + "\\Estimation_" + spa.data_numb
 
 
 plt.errorbar(np.arange(rounds), p_s, yerr=pstd_s, fmt='-', ecolor='red', capsize=5, label='p estimated')
-plt.savefig(".\\data\\" + spa.data_archives + "\\p_estimation_" + spa.data_number + ".png")
+plt.savefig(".\\data\\" + spa.data_archives + "_" + str(spa.dataset_number) + "\\p_estimation_" + spa.data_number + ".png")
 plt.clf()
 plt.errorbar(np.arange(rounds), phi_s, yerr=phistd_s, fmt='-', ecolor='blue', capsize=5, label='\u03C6 estimated')
-plt.savefig(".\\data\\" + spa.data_archives + "\\phi_estimation_" + spa.data_number + ".png")
+plt.savefig(".\\data\\" + spa.data_archives + "_" + str(spa.dataset_number) + "\\phi_estimation_" + spa.data_number + ".png")
 
 
 

@@ -2,15 +2,19 @@ import numpy as np
 
 # File saving path
 
-data_archives = "112524"
-data_number_int = 1
+data_archives = "112624"
+data_number_int = 9 # number of simulation round for different parameter
 data_number = str(data_number_int)
 datelabel = data_archives + "/" + data_number
+
+dataset_number_int = 8 # number of running round of simulation
+dataset_number = str(dataset_number_int)
+
 
 # Theoretical running configuration
 
 rho_receptor = 300
-theo_rounds = 10
+theo_rounds = 100
 
 variable_list = [0.01, 0.1, 0.5, 1, 50, 500, 1000, 5000, 10000]
 
