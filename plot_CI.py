@@ -12,11 +12,11 @@ phi = np.pi / 3
 #===========================================================#
 
 ### Read data
-p_s = np.zeros(spa.theo_rounds)
-phi_s = np.zeros(spa.theo_rounds)
+p_s = np.zeros(spa.theo_rounds) # each reading of p
+phi_s = np.zeros(spa.theo_rounds) # each reading of phi
 
-p_s_ave = np.zeros(spa.theo_rounds)
-phi_s_ave = np.zeros(spa.theo_rounds)
+p_s_datasetstack = np.zeros(spa.theo_rounds) # p readings stacked by datasets
+phi_s_datasetstack = np.zeros(spa.theo_rounds) # phi readings stacked by datasets
 
 ci_s = []
 
@@ -37,6 +37,10 @@ for i in range(spa.dataset_number_int):
             print("Num of samples: " + str(num_samples))
             break
 
+        # calculate CI
+        ci = np.average(np.cos(phi_s_ave - [phi for i in range(len(phi_s_ave))]))
+        ci_s.append(ci)
+
     p_s_ave /= (i + 1)
     phi_s_ave /= (i + 1)
 
@@ -47,12 +51,6 @@ for i in range(spa.dataset_number_int):
     # plt.show()
     plt.clf()
 
-    # calculate CI
-    ci = np.average(np.cos(phi_s_ave - [phi for i in range(len(phi_s_ave))]))
-    ci_s.append(ci)
-
-    print(ci_s)
-
     # plot CI
     plt.plot(spa.variable_list, ci_s, 'b.-')
     plt.xscale('log')
@@ -61,3 +59,5 @@ for i in range(spa.dataset_number_int):
     plt.xticks(spa.variable_list, fontsize=6)
     plt.savefig(".\\data\\" + spa.data_archives + "_0\\CI" + "_"+ str((i + 1) * spa.theo_rounds) + ".png")
     plt.show()
+
+    ci_s = []

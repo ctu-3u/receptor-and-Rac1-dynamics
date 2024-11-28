@@ -5,9 +5,9 @@ $f1 = "theoretic_random_receptor_MLA.py"
 $f2 = "simu_para.py"
 
 # Loop through values for x_var
-For ($y_var = 7; $y_var -le 8; $y_var++){
+For ($y_var = 1; $y_var -le 20; $y_var++){ # running time of datasets
 
-	New-Item -Name ".\data\112624_$y_var" -ItemType Directory
+	New-Item -Name ".\data\112724_$y_var" -ItemType Directory
 	
 	# Read the content of f_2.py
    	$content = Get-Content -Path $f2
@@ -18,7 +18,7 @@ For ($y_var = 7; $y_var -le 8; $y_var++){
     	# Write the updated content back to f_2.py
     	Set-Content -Path $f2 -Value $newContent
 
-	For ($x_var = 1; $x_var -le 9; $x_var++) {
+	For ($x_var = 1; $x_var -le 15; $x_var++) {
     		# Read the content of f_2.py
     		$content = Get-Content -Path $f2
     
