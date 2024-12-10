@@ -48,7 +48,7 @@ class Reaction:
         return c_xi / (c_xi + K_d) * rho_rec * rho_inact
 
     # Receptor binding (stochastic)
-    def receptor_random(self, x_i, num_compart, rho_act):
+    def receptor_random(self, x_i, num_compart, rho_inact):
         gradi = spa.Gradient()
         
         # calculate binding probability
@@ -56,7 +56,7 @@ class Reaction:
         p_threshold = conc_x / (conc_x + gradi.K_d)
         # number of randomly bounded receptors
         n_rec_bound = self.random_pass_test(spa.rho_receptor, p_threshold)
-        n_rac_activated = rho_act * n_rec_bound / spa.rho_receptor
+        n_rac_activated = rho_inact * n_rec_bound / spa.rho_receptor
         return n_rac_activated
     
 

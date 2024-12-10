@@ -2,12 +2,12 @@ import numpy as np
 
 # File saving path
 
-data_archives = "120924"
-data_number_int =  1 # number of simulation round for different parameter (in our case, different c0)
+data_archives = "121024"
+data_number_int =  9 # number of simulation round for different parameter (in our case, different c0)
 data_number = str(data_number_int)
 datelabel = data_archives + "/" + data_number
 
-dataset_number_int = 2 # number of running round of simulation
+dataset_number_int = 1 # number of running round of simulation
 dataset_number = str(dataset_number_int)
 
 
@@ -49,7 +49,7 @@ class Gradient:
 
 # Simulation running configuration
 
-rounds = 10001
+rounds = 25001
 sampot = 100
 
 

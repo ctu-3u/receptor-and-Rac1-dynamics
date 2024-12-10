@@ -5,9 +5,9 @@ $f1 = "1d_Rac_dynamics.py"
 $f2 = "simu_para.py"
 
 # Loop through values for x_var
-For ($y_var = 1; $y_var -le 2; $y_var++){ # running time of datasets
+For ($y_var = 1; $y_var -le 1; $y_var++){ # running time of datasets
 
-	New-Item -Name ".\data\120924_$y_var" -ItemType Directory
+	New-Item -Name ".\data\121024_$y_var" -ItemType Directory # MANUALLY CHANGE PATH
 	
 	# Read the content of f_2.py
    	$content = Get-Content -Path $f2

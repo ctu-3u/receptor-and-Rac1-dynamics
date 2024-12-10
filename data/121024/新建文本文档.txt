@@ -8,7 +8,7 @@ Randomly bind receptors
     K_d = 5
 
 rho_receptor = 300
-rounds = 40001
+rounds = 25001
 sampot = 100
 
 
