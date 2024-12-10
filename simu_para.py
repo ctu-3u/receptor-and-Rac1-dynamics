@@ -2,12 +2,12 @@ import numpy as np
 
 # File saving path
 
-data_archives = "112724"
-data_number_int =  11 # number of simulation round for different parameter
+data_archives = "120924"
+data_number_int =  1 # number of simulation round for different parameter (in our case, different c0)
 data_number = str(data_number_int)
 datelabel = data_archives + "/" + data_number
 
-dataset_number_int = 16 # number of running round of simulation
+dataset_number_int = 2 # number of running round of simulation
 dataset_number = str(dataset_number_int)
 
 
@@ -28,7 +28,7 @@ cell_membrane = 20 # unit: um. the real length of the cell membrane
 compart_num = 80 # number of compartments we devide for simulation
 total_number_C = 200 # total number of active and inactive Rac
 
-initial_stimulus = 0.5
+initial_stimulus = 0
 initial_broad = 16
 
 D_act = 0.1
@@ -49,7 +49,7 @@ class Gradient:
 
 # Simulation running configuration
 
-rounds = 50001
+rounds = 10001
 sampot = 100
 
 

@@ -1,5 +1,7 @@
 import numpy as np
 
+import simu_para as spa
+
 class Reaction:
     def __init__(self):
         return
@@ -46,20 +48,16 @@ class Reaction:
         return c_xi / (c_xi + K_d) * rho_rec * rho_inact
 
     # Receptor binding (stochastic)
-    def receptor_random(self, x_i, num_compart, rho_inact):
-        # gradient parameter
-        c0 = 0.04
-        p = 1
-        phi = np.pi / 2
-        # bind parameter
-        K_d = 5
-        rho_rec = 5
+    def receptor_random(self, x_i, num_compart, rho_act):
+        gradi = spa.Gradient()
+        
         # calculate binding probability
-        conc_x = c0 * np.exp(p / 2 * np.cos(2 * np.pi * x_i / num_compart - phi))
-        p_threshold = conc_x / (conc_x + K_d)
+        conc_x = gradi.c0 * np.exp(gradi.p / 2 * np.cos(2 * np.pi * x_i / num_compart - gradi.phi))
+        p_threshold = conc_x / (conc_x + gradi.K_d)
         # number of randomly bounded receptors
-        n_rec_bound = self.random_pass_test(rho_rec, p_threshold)
-        return n_rec_bound
+        n_rec_bound = self.random_pass_test(spa.rho_receptor, p_threshold)
+        n_rac_activated = rho_act * n_rec_bound / spa.rho_receptor
+        return n_rac_activated
     
 
     ## Stimulus expression
@@ -94,7 +92,9 @@ class Reaction:
     def zerotest(self,t,x,rho_act=0,rho_inact=0):
         return 0
 
-    # Backup functions
+    ### Backup functions
+
+    # randomness pass
     def random_pass_test(self, n_rec, prob):
         np.random.seed()
         t = np.random.rand(n_rec)
